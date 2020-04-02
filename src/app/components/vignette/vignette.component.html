@@ -1,0 +1,27 @@
+<mat-card class="vignette">
+  <mat-card-subtitle>Type d'initiative : {{typeInitiative}}</mat-card-subtitle>
+  <div class="logo-vignette" [ngStyle]="{'background-image': 'url(' + urlImg + ')'}">
+  </div>
+  <mat-divider class="separator" [inset]=true></mat-divider>
+
+  <mat-card-content class="contenu-vignette">
+    <mat-card-title class="titre-vignette">{{ nomStructure }}</mat-card-title>
+    <p *ngIf="descriptionAction">
+      {{descriptionAction}}
+    </p>
+    <p *ngIf="descriptionInitiative">
+      {{descriptionInitiative}}
+    </p>
+    <p *ngIf="descriptionSoutienNature">
+      {{descriptionSoutienNature}}
+    </p>
+    <div *ngIf="montant">
+      <h4><b>Montant</b></h4>
+      <p>{{montant}}</p>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <a href={{lienPage}}><button mat-button>Appel au don</button></a>
+    <a href={{lienPage}}><button mat-button>En savoir plus</button></a>
+  </mat-card-actions>
+</mat-card>
