@@ -5,20 +5,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VignetteComponent } from './components/vignette/vignette.component';
-import {MatCardModule} from '@angular/material/card';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatButtonModule} from '@angular/material/button';
 import { NavComponent } from './share/nav/nav.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { ListeInitiativesComponent } from './components/liste-initiatives/liste-initiatives.component';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     NavComponent,
-    VignetteComponent
+    VignetteComponent,
+    ListeInitiativesComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +30,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     MatButtonModule,
     MatCardModule,
     MatDividerModule,
+    MatGridListModule,
     MatToolbarModule
   ],
   providers: [],
