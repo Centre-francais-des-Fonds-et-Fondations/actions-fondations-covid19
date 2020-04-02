@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-vignette',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vignette.component.scss']
 })
 export class VignetteComponent implements OnInit {
+
+  @Input() initiative: object;
 
   nomStructure = '1% for the planet France';
   typeInitiative = 'Soutien';
