@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  airtable: {
+    apiKey: 'keycssVW4Hjnjwpov',
+    baseId: 'appyiU5U8JBAf23m2',
+    tableName: 'Initiatives',
+    viewName: 'Liste des initiatives publiées'
+  }
 };
 
 /*

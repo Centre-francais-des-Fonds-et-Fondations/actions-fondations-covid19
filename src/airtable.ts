@@ -1,16 +1,13 @@
 import Airtable from 'airtable';
-
-import { config } from 'dotenv';
-
-config();
+import { environment } from './environments/environment';
 
 const base = new Airtable({
-  apiKey: process.env.AIRTABLE_API_KEY,
-}).base(process.env.AIRTABLE_BASE_ID);
+  apiKey: environment.airtable.apiKey,
+}).base(environment.airtable.baseId);
 
-const publishedInitiative = base('Initiatives')
+const publishedInitiative = base(environment.airtable.tableName)
   .select({
-    view: 'Liste des initiatives publiées',
+    view: environment.airtable.viewName,
   });
 
 // Fields detail : https://airtable.com/appyiU5U8JBAf23m2/api/docs#javascript/table:initiatives:fields
