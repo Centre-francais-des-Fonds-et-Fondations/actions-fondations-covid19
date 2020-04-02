@@ -1,0 +1,18 @@
+.vignette {
+  max-width: 400px;
+  margin: 10px;
+  .logo-vignette {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 200px;
+    margin: 10px;
+  }
+  .contenu-vignette {
+    margin-top: 15px;
+  }
+
+  .titre-vignette {
+    margin-bottom: 20px;
+  }
+}
