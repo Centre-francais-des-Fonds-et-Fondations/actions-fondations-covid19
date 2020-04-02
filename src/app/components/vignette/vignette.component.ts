@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class VignetteComponent implements OnInit {
 
-  @Input() initiative: object;
+  @Input() initiative: any;
 
   nomStructure = '1% for the planet France';
   typeInitiative = 'Soutien';
