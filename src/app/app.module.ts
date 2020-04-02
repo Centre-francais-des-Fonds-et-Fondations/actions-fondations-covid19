@@ -9,21 +9,25 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import { NavComponent } from './share/nav/nav.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { HomepageComponent } from './components/homepage/homepage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    VignetteComponent,
-    NavComponent
+    HomepageComponent,
+    NavComponent,
+    VignetteComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatButtonModule,
     MatCardModule,
     MatDividerModule,
-    MatButtonModule,
-    BrowserAnimationsModule
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
