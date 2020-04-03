@@ -8,21 +8,33 @@ import { getInitiatives, getInitiativesByPages, pageReader } from '../../../airt
 })
 export class ListeInitiativesComponent implements OnInit {
 
-  listeInitiatives = {};
+  results;
   pageActions;
-  pagination;
+  listeInitiatives;
 
   constructor() { }
 
   ngOnInit(): void {
     getInitiativesByPages(12)
-    .then((listResults) => {
+    .then((listResults: Array<Array<any>>) => {
       console.log('listResults');
       console.log(listResults);
+      this.results = listResults;
       this.listeInitiatives = listResults[0];
-      this.pagination = listResults;
       this.pageActions = pageReader(listResults);
     }).catch();
   }
+
+  next(){
+    this.listeInitiatives = this.pageActions.next();
+  }
+  prev(){
+    this.listeInitiatives = this.pageActions.prev();
+  }
+  setPageIndex(i: number) {
+    this.pageActions.setIndex(i);
+    this.listeInitiatives = this.pageActions.get();
+  }
+
 
 }
