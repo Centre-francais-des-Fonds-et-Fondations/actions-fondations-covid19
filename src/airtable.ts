@@ -138,6 +138,7 @@ const pageReader = <t>(array: Array<Array<t>>) => {
       return array[currentIndex];
     },
     setIndex: (index: number) => currentIndex = index,
+    get: () => array[currentIndex],
     getIndex: (): number => currentIndex,
     getLength: (): number => array.length,
     getAcc: (): Array<t> => accumulator,
