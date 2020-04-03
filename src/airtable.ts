@@ -109,24 +109,36 @@ const getInitiativesByPages = (pageSize = 10): Promise<object> =>
  * @param array le tableau ranger par pages à lire
  * @returns next: page suivant; prev: page precedante; getLength: la longueur; getIndex: l'indice courant; setIndex: assigne l'indice courrant
  */
-const pageReader = <t>(array: Array<t>) => {
+const pageReader = <t>(array: Array<Array<t>>) => {
   let currentIndex = 0;
+  let accumulator = []; // contient tous les element à plat de 0 à currentIndex
   return {
-    next: (): t => {
-      if (currentIndex++ >= array.length) {
+    next: (): Array<t> => {
+      if (currentIndex >= array.length - 1) {
         return null;
       }
+      currentIndex += 1;
+      accumulator = array
+        .slice(0, currentIndex + 1)
+        // flatten
+        .reduce((acc, cur, i) => [...acc, ...cur], []);
       return array[currentIndex];
     },
-    prev: (): t => {
-      if (currentIndex-- < 0) {
+    prev: (): Array<t> => {
+      if (currentIndex - 1 < 0) {
         return null;
       }
+      currentIndex -= 1;
+      accumulator = array
+        .slice(0, currentIndex)
+        // flatten
+        .reduce((acc, cur, i) => [...acc, ...cur], []);
       return array[currentIndex];
     },
     setIndex: (index: number) => currentIndex = index,
     getIndex: (): number => currentIndex,
-    getLength: (): number => array.length
+    getLength: (): number => array.length,
+    getAcc: (): Array<t> => accumulator,
   };
 };
 
