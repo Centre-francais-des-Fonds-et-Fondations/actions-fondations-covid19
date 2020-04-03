@@ -30,9 +30,9 @@ const formatRecord = (record: Record<string, any>): object => ({
   interventionOtherArea: record.get('Champ autre secteur'),
   interventionZone: record.get('Zone d’intervention'),
 
-  // actionCoordinatedWithPP: record.get(
-  //   'Action coordonnée avec les pouvoirs publics (oui/non)'
-  // ),
+  actionCoordinatedWithPP: record.get(
+    'Action coordonnée avec les pouvoirs publics (oui/non)'
+  ),
   actionDescription: record.get('Description de l’action en 400 signes'),
 
   supportAndEngagement: record.get('Soutiens et engagements'),
@@ -40,13 +40,13 @@ const formatRecord = (record: Record<string, any>): object => ({
 
   // initiativeType: record.get("Type d'initiative"),
   // initiativeStatus: record.get("Statut de l'initiative"),
-  // initiativeDescription: record.get("Description de l'initiative"),
+  initiativeDescription: record.get("Description de l'initiative"),
 
   region: record.get('Régions'),
   amount: record.get('Montant'),
   link: record.get('Lien vers votre page d’appel à don'),
   attachments: record.get('Attachment'),
-  // annualBudget: record.get('Budget annuel 2018 (total recettes)'),
+  annualBudget: record.get('Budget annuel 2018 (total recettes)'),
   legalForm: record.get('forme juridique'),
 });
 
@@ -84,8 +84,10 @@ const getInitiativesByPages = (pageSize = 10): Promise<object> =>
           'Régions',
           'Montant',
           'Lien vers votre page d’appel à don',
-          // 'Action coordonnée avec les pouvoirs publics (oui/non)',
+          'Action coordonnée avec les pouvoirs publics (oui/non)',
+          'Budget annuel 2018 (total recettes)',
           'forme juridique',
+          'Attachment',
         ],
         view: environment.airtable.viewName,
       })
