@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import Airtable from '../../../airtable';
+import { getInitiatives } from '../../../airtable';
 
 @Component({
   selector: 'app-liste-initiatives',
@@ -13,11 +13,11 @@ export class ListeInitiativesComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    Airtable.getInitiatives()
-    .then((AAA) => {
-      console.log('AAA');
-      console.log(AAA);
-      this.listeInitiatives = AAA;
+    getInitiatives()
+    .then((listResults) => {
+      console.log('listResults');
+      console.log(listResults);
+      this.listeInitiatives = listResults;
     }).catch();
   }
 
