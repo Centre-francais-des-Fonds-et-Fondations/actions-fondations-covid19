@@ -84,7 +84,7 @@ const getInitiativesByPages = (pageSize = 10): Promise<object> =>
           'Régions',
           'Montant',
           'Lien vers votre page d’appel à don',
-          'Action coordonnée avec les pouvoirs publics (oui/non)',
+          /* 'Action coordonnée avec les pouvoirs publics (oui/non)', */
           'Budget annuel 2018 (total recettes)',
           'forme juridique',
           'Attachment',

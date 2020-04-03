@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getInitiatives } from '../../../airtable';
+import { getInitiatives, getInitiativesByPages, pageReader } from '../../../airtable';
 
 @Component({
   selector: 'app-liste-initiatives',
@@ -9,15 +9,19 @@ import { getInitiatives } from '../../../airtable';
 export class ListeInitiativesComponent implements OnInit {
 
   listeInitiatives = {};
+  pageActions;
+  pagination;
 
   constructor() { }
 
   ngOnInit(): void {
-    getInitiatives()
+    getInitiativesByPages(12)
     .then((listResults) => {
       console.log('listResults');
       console.log(listResults);
-      this.listeInitiatives = listResults;
+      this.listeInitiatives = listResults[0];
+      this.pagination = listResults;
+      this.pageActions = pageReader(listResults);
     }).catch();
   }
 
