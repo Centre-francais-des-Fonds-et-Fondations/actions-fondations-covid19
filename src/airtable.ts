@@ -72,6 +72,7 @@ const getInitiativesByPages = (pageSize = 10): Promise<object> =>
         fields: [
           'Id',
           'Date de création',
+          'Nom de la structure',
           'Structure approuvée',
           'Secteurs d’interventions',
           'Champ autre secteur',
