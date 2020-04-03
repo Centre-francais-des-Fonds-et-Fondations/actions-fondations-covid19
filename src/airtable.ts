@@ -38,7 +38,7 @@ const formatRecord = (record: Record<string, any>): object => ({
   supportAndEngagement: record.get('Soutiens et engagements'),
   supportDescription: record.get('Description soutien en nature'),
 
-  // initiativeType: record.get("Type d'initiative"),
+  initiativeType: record.get("Type d'initiative"),
   // initiativeStatus: record.get("Statut de l'initiative"),
   initiativeDescription: record.get("Description de l'initiative"),
 
@@ -75,7 +75,7 @@ const getInitiativesByPages = (pageSize = 10): Promise<object> =>
           'Structure approuvée',
           'Secteurs d’interventions',
           'Champ autre secteur',
-          // "Type d'initiative",
+          `Type d'initiative`,
           // 'Description de l’action en 400 signes',
           "Description de l'initiative",
           'Soutiens et engagements',
@@ -84,7 +84,6 @@ const getInitiativesByPages = (pageSize = 10): Promise<object> =>
           'Régions',
           'Montant',
           'Lien vers votre page d’appel à don',
-          /* 'Action coordonnée avec les pouvoirs publics (oui/non)', */
           'Budget annuel 2018 (total recettes)',
           'forme juridique',
           'Attachment',
