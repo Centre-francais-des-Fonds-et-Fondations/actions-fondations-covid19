@@ -111,7 +111,7 @@ const getInitiativesByPages = (pageSize = 10): Promise<object> =>
  */
 const pageReader = <t>(array: Array<Array<t>>) => {
   let currentIndex = 0;
-  let accumulator = []; // contient tous les element à plat de 0 à currentIndex
+  let accumulator = []; // contient tous les elements à plat de 0 à currentIndex
   return {
     next: (): Array<t> => {
       if (currentIndex >= array.length - 1) {
