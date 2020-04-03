@@ -30,17 +30,17 @@ const formatRecord = (record: Record<string, any>): object => ({
   interventionOtherArea: record.get('Champ autre secteur'),
   interventionZone: record.get('Zone d’intervention'),
 
-  actionCoordinatedWithPP: record.get(
-    'Action coordonnée avec les pouvoirs publics (oui/non)'
-  ),
+  // actionCoordinatedWithPP: record.get(
+  //   'Action coordonnée avec les pouvoirs publics (oui/non)'
+  // ),
   actionDescription: record.get('Description de l’action en 400 signes'),
 
   supportAndEngagement: record.get('Soutiens et engagements'),
   supportDescription: record.get('Description soutien en nature'),
 
-  initiativeType: record.get("Type d'initiative"),
+  // initiativeType: record.get("Type d'initiative"),
   // initiativeStatus: record.get("Statut de l'initiative"),
-  initiativeDescription: record.get("Description de l'initiative"),
+  // initiativeDescription: record.get("Description de l'initiative"),
 
   region: record.get('Régions'),
   amount: record.get('Montant'),
@@ -75,8 +75,8 @@ const getInitiativesByPages = (pageSize = 10): Promise<object> =>
           'Structure approuvée',
           'Secteurs d’interventions',
           'Champ autre secteur',
-          "Type d'initiative",
-          'Description de l’action en 400 signes',
+          // "Type d'initiative",
+          // 'Description de l’action en 400 signes',
           "Description de l'initiative",
           'Soutiens et engagements',
           'Description soutien en nature',
@@ -84,7 +84,7 @@ const getInitiativesByPages = (pageSize = 10): Promise<object> =>
           'Régions',
           'Montant',
           'Lien vers votre page d’appel à don',
-          'Action coordonnée avec les pouvoirs publics (oui/non)',
+          // 'Action coordonnée avec les pouvoirs publics (oui/non)',
           'forme juridique',
         ],
         view: environment.airtable.viewName,
