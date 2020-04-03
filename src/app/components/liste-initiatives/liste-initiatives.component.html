@@ -1,0 +1,10 @@
+<div class="liste-initiative">
+  <h1>Liste-initiative dans le rectangle rouge</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-6 col-xl-4" *ngFor="let initiative of listeInitiatives">
+        <app-vignette [initiative]="initiative"></app-vignette>
+      </div>
+    </div>
+  </div>
+</div>
