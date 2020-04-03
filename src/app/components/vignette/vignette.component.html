@@ -1,27 +1,29 @@
 <mat-card class="vignette" *ngIf="initiative">
-  <mat-card-subtitle>Type d'initiative : {{initiative.type}}</mat-card-subtitle>
-  <div class="logo-vignette" [ngStyle]="{'background-image': 'url(' + initiative.urlImg + ')'}">
+  <mat-card-subtitle>Type d'initiative : {{initiative.initiativeType}}</mat-card-subtitle>
+  <div *ngIf="initiative.attachments">
+    <div class="logo-vignette" [ngStyle]="{'background-image': 'url(' + initiative.attachments[0].url + ')'}">
+    </div>
+    <mat-divider class="separator" [inset]=true></mat-divider>
   </div>
-  <mat-divider class="separator" [inset]=true></mat-divider>
 
   <mat-card-content class="contenu-vignette">
-    <mat-card-title class="titre-vignette">{{ initiative.nomStructure }}</mat-card-title>
-    <p *ngIf="initiative.descriptionAction">
-      {{initiative.descriptionAction}}
+    <mat-card-title class="titre-vignette">{{ initiative.structureName }}</mat-card-title>
+    <p *ngIf="initiative.actionDescription">
+      {{initiative.actionDescription}}
     </p>
-    <p *ngIf="initiative.descriptionInitiative">
-      {{initiative.descriptionInitiative}}
+    <p *ngIf="initiative.initiativeDescription">
+      {{initiative.initiativeDescription}}
     </p>
-    <p *ngIf="initiative.descriptionSoutienNature">
-      {{initiative.descriptionSoutienNature}}
+    <p *ngIf="initiative.supportDescription">
+      {{initiative.supportDescription}}
     </p>
-    <div *ngIf="initiative.montant">
+    <div *ngIf="initiative.amount">
       <h4><b>Montant</b></h4>
-      <p>{{initiative.montant}}</p>
+      <p>{{initiative.amount | currency:'EUR':'symbol':'4.0-2' }}</p>
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <a href={{initiative.lienPage}}><button mat-button>Appel au don</button></a>
-    <a href={{initiative.lienPage}}><button mat-button>En savoir plus</button></a>
+    <a href={{initiative.link}} *ngIf="initiative.initiativeType === 'Besoin'"><button mat-button>Appel au don</button></a>
+    <a href={{initiative.link}} *ngIf="initiative.initiativeType === 'Soutien'"><button mat-button>En savoir plus</button></a>
   </mat-card-actions>
 </mat-card>
