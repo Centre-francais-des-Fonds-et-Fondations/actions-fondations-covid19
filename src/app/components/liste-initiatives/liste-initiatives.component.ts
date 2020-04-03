@@ -9,6 +9,7 @@ import { getInitiatives, getInitiativesByPages, pageReader } from '../../../airt
 export class ListeInitiativesComponent implements OnInit {
 
   listeInitiatives = {};
+  pageActions;
   pagination;
 
   constructor() { }
@@ -19,7 +20,8 @@ export class ListeInitiativesComponent implements OnInit {
       console.log('listResults');
       console.log(listResults);
       this.listeInitiatives = listResults[0];
-      this.pagination = pageReader(listResults);
+      this.pagination = listResults;
+      this.pageActions = pageReader(listResults);
     }).catch();
   }
 
