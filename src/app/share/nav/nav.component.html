@@ -1,10 +1,25 @@
-<mat-toolbar class="navbar">
-    <a href=" https://www.centre-francais-fondations.org">
-        <img src="../../../assets/images/CFF_LOGO_CARRÉ_MOYEN.jpg" height="64">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.centre-francais-fondations.org">
+        <img src="../../../assets/images/CFF_LOGO_CARRÉ_MOYEN.jpg" height="48">
     </a>
-    <a mat-button routerLink="">
-        <i class="material-icons md-48">home</i>
-    </a>
-    <a mat-button href="https://airtable.com/shr0VM0fwSEa82j6X">Partagez votre initiative</a>
-    <a mat-button href="https://airtable.com/shrG9RZMcmLpB75fK">Restez informés</a>
-</mat-toolbar>
+  
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="">Accueil<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://airtable.com/shrBtEOYq6HubrmaS">Besoin d’un soutien</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://airtable.com/shr0VM0fwSEa82j6X">Offre d’un soutien</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://airtable.com/shrG9RZMcmLpB75fK">Restez informés</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
