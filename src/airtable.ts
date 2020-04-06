@@ -115,9 +115,35 @@ const PageReader = <t>(array: Array<Array<t>>) => {
   if (array.length <= 0) {
     throw new Error('Array must not be empty');
   }
+  function arrayByPages(flatArray, pageSize) {
+    // on rempli le tableau des élément de la recherche selon la taille max des pages
+    arrayBuffer = [];
+    let acc = [];
+    flatArray.forEach(record => {
+      if (acc.length >= pageSize) {
+        arrayBuffer.push(acc);
+        acc = [];
+      }
+      acc.push(record);
+    });
+    if (acc.length > 0) {
+      arrayBuffer.push(acc);
+    }
+    return arrayBuffer;
+  }
   let currentIndex = 0;
   let arrayBuffer = array; // Une image du tableau de base pouvant etre manipuler à souhait
   // let accumulator = []; // contient tous les elements à plat de 0 à currentIndex
+  const sort = () => {
+    arrayBuffer = arrayByPages(
+      array
+        // flatten
+        .reduce((acc, cur, i) => [...acc, ...cur], [])
+        // sort by date
+        .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime()),
+      array[0].length);
+  };
+  sort();
   return {
     next: (): Array<t> => {
       if (currentIndex >= arrayBuffer.length - 1) {
@@ -150,30 +176,18 @@ const PageReader = <t>(array: Array<Array<t>>) => {
     // getAcc: (): Array<t> => accumulator,
     isEmpty: () => !arrayBuffer.some((value) => value.some(_ => true)),
     search: (filter: (c: t, i: number, a: Array<t>) => boolean) => {
-      const filterdArray = array
-        // search
-        .map(arr => arr.filter(filter))
-        // flatten
-        .reduce((acc, cur, i) => [...acc, ...cur], []);
-      // on rempli le tableau des élément de la recherche selon la taille max des pages
-      const pageSize = array[currentIndex].length;
-      arrayBuffer = [];
-      let acc = [];
-
-      filterdArray.forEach(record => {
-        if (acc.length >= pageSize) {
-          arrayBuffer.push(acc);
-          acc = [];
-        }
-        acc.push(record);
-      });
-      if (acc.length > 0) {
-        arrayBuffer.push(acc);
-      }
-    }
+      arrayBuffer = arrayByPages(
+        array
+          // search
+          .map(arr => arr.filter(filter))
+          // flatten
+          .reduce((acc, cur, i) => [...acc, ...cur], []),
+        array[0].length);
+      this.sort();
+    },
+    sort
   };
 };
-
 export {
   getInitiatives,
   getInitiativesByPages,

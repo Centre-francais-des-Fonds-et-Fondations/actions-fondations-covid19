@@ -18,7 +18,6 @@ export class ListeInitiativesComponent implements OnInit {
       const data = await getInitiativesByPages(this.PAGE_SIZE);
       this.pageReader = PageReader(data);
       this.callState = 'ok';
-      console.log(data);
     } catch (err) {
       this.callState = 'ko';
     }
