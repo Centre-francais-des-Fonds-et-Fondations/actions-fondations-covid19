@@ -9,11 +9,11 @@ import { NavComponent } from './share/nav/nav.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { ListeInitiativesComponent } from './components/liste-initiatives/liste-initiatives.component';
 
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatToolbarModule } from '@angular/material/toolbar';
+// import { MatButtonModule } from '@angular/material/button';
+// import { MatCardModule } from '@angular/material/card';
+// import { MatDividerModule } from '@angular/material/divider';
+// import { MatGridListModule } from '@angular/material/grid-list';
+// import { MatToolbarModule } from '@angular/material/toolbar';
 import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
 
 @NgModule({
@@ -29,11 +29,11 @@ import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDividerModule,
-    MatGridListModule,
-    MatToolbarModule
+    // MatButtonModule,
+    // MatCardModule,
+    // MatDividerModule,
+    // MatGridListModule,
+    // MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
