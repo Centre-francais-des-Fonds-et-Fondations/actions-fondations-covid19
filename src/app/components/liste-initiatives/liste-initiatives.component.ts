@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getInitiatives, getInitiativesByPages, pageReader } from '../../../airtable';
+import { getInitiatives, getInitiativesByPages, PageReader } from '../../../airtable';
 
 @Component({
   selector: 'app-liste-initiatives',
@@ -8,33 +8,36 @@ import { getInitiatives, getInitiativesByPages, pageReader } from '../../../airt
 })
 export class ListeInitiativesComponent implements OnInit {
 
-  results;
-  pageActions;
-  listeInitiatives;
+  pageReader;
+  isLoading = true;
 
-  constructor() { }
-
-  ngOnInit(): void {
-    getInitiativesByPages(12)
-    .then((listResults: Array<Array<any>>) => {
-      console.log('listResults');
-      console.log(listResults);
-      this.results = listResults;
-      this.listeInitiatives = listResults[0];
-      this.pageActions = pageReader(listResults);
-    }).catch();
+  async ngOnInit() {
+    const data = await getInitiativesByPages(6);
+    this.pageReader = PageReader(data);
+    this.isLoading = false;
   }
 
-  next(){
-    this.listeInitiatives = this.pageActions.next();
+  onChange(event: any) {
+    const query = event.target.value.toLowerCase();
+    // query: string
+    this.pageReader.search(
+      (record) => {
+        // si rien, tout afficher
+        if (query.length === 0) {
+          return true;
+        }
+        let critere: string;
+        // il est possible qu'il n'y ai pas de nom de structure => VOIR LE AIRTABLE
+        if (record.structureName) {
+          critere = record.structureName;
+        }
+        else {
+          critere = record.id;
+        }
+        return critere.toLowerCase().match(new RegExp(`${query}.*`));
+      }
+    );
+    this.pageReader.setIndex(0);
   }
-  prev(){
-    this.listeInitiatives = this.pageActions.prev();
-  }
-  setPageIndex(i: number) {
-    this.pageActions.setIndex(i);
-    this.listeInitiatives = this.pageActions.get();
-  }
-
 
 }
