@@ -33,6 +33,7 @@ export class ListeInitiativesComponent implements OnInit {
   }
 
   search() {
+    this.pageReader.setIndex(0);
     this.pageReader.search(
       (record) => {
         // si rien, tout afficher
@@ -50,6 +51,5 @@ export class ListeInitiativesComponent implements OnInit {
         return valid;
       }
     );
-    this.pageReader.setIndex(0);
   }
 }
