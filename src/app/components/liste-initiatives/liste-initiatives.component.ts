@@ -7,37 +7,50 @@ import { getInitiatives, getInitiativesByPages, PageReader } from '../../../airt
   styleUrls: ['./liste-initiatives.component.scss']
 })
 export class ListeInitiativesComponent implements OnInit {
+  pageReader: any;
+  query = '';
+  queryType = '';
+  PAGE_SIZE = 6;
 
-  pageReader;
-  isLoading = true;
-
+  callState = 'await';
   async ngOnInit() {
-    const data = await getInitiativesByPages(6);
-    this.pageReader = PageReader(data);
-    this.isLoading = false;
+    try {
+      const data = await getInitiativesByPages(this.PAGE_SIZE);
+      this.pageReader = PageReader(data);
+      this.callState = 'ok';
+      console.log(data);
+    } catch (err) {
+      this.callState = 'ko';
+    }
   }
 
   onChange(event: any) {
-    const query = event.target.value.toLowerCase();
-    // query: string
+    this.query = event.target.value.toLowerCase();
+    this.search();
+  }
+  onSelectType(event: any) {
+    this.queryType = event.target.value.toLowerCase();
+    this.search();
+  }
+
+  search() {
     this.pageReader.search(
       (record) => {
         // si rien, tout afficher
-        if (query.length === 0) {
+        if (this.query.length === 0 && this.queryType.length === 0) {
           return true;
         }
-        let critere: string;
-        // il est possible qu'il n'y ai pas de nom de structure => VOIR LE AIRTABLE
-        if (record.structureName) {
-          critere = record.structureName;
+        // sinon ...
+        let valid = true;
+        if (this.query.length > 0) {
+          valid = record.structureName.toLowerCase().match(new RegExp(`${this.query}.*`));
         }
-        else {
-          critere = record.id;
+        if (this.queryType.length > 0) {
+          valid = valid && record.initiativeType.toLowerCase().match(new RegExp(`${this.queryType}.*`));
         }
-        return critere.toLowerCase().match(new RegExp(`${query}.*`));
+        return valid;
       }
     );
     this.pageReader.setIndex(0);
   }
-
 }

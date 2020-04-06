@@ -148,6 +148,7 @@ const PageReader = <t>(array: Array<Array<t>>) => {
     getIndex: (): number => currentIndex,
     getLength: (): number => arrayBuffer.length,
     // getAcc: (): Array<t> => accumulator,
+    isEmpty: () => !arrayBuffer.some((value) => value.some(_ => true)),
     search: (filter: (c: t, i: number, a: Array<t>) => boolean) => {
       const filterdArray = array
         // search

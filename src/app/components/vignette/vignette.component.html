@@ -1,28 +1,27 @@
-<mat-card class="vignette" *ngIf="initiative">
-  <mat-card-subtitle>Type d'initiative : {{initiative.initiativeType}}</mat-card-subtitle>
-  <div *ngIf="initiative.attachments">
-    <div class="logo-vignette" [ngStyle]="{'background-image': 'url(' + initiative.attachments[0].url + ')'}">
-    </div>
-    <mat-divider class="separator" [inset]=true></mat-divider>
-  </div>
+<div class="card" *ngIf="initiative">
+  <img class="card-img-top" src={{initiative.attachments[0].url}} alt="{{ initiative.structureName }} picture"
+    *ngIf="initiative.attachments">
 
-  <mat-card-content class="contenu-vignette">
-    <mat-card-title class="titre-vignette">{{ initiative.structureName }}</mat-card-title>
-    <p *ngIf="initiative.actionDescription">
+  <div class="card-body">
+    <h5 class="card-title">{{ initiative.structureName }}</h5>
+    <div class="card-subtitle mb-2">
+      <h6 class="text-muted mb-1" *ngIf="initiative.initiativeType">
+        Type d'initiative : {{initiative.initiativeType}}
+      </h6>
+      <h6 class="text-muted mb-1" *ngIf="initiative.amount">
+        Montant: {{initiative.amount | currency:'EUR':'symbol':'4.0-2' }}
+      </h6>
+    </div>
+
+    <p class="card-text" *ngIf="initiative.actionDescription">
       {{initiative.actionDescription}}
     </p>
-    <p *ngIf="initiative.initiativeDescription">
+    <p class="card-text" *ngIf="initiative.initiativeDescription">
       {{initiative.initiativeDescription}}
     </p>
-    <p *ngIf="initiative.supportDescription">
+    <p class="card-text" *ngIf="initiative.supportDescription">
       {{initiative.supportDescription}}
     </p>
-    <div *ngIf="initiative.amount">
-      <h4><b>Montant</b></h4>
-      <p>{{initiative.amount | currency:'EUR':'symbol':'4.0-2' }}</p>
-    </div>
-  </mat-card-content>
-  <mat-card-actions>
-    <a href={{initiative.link}}><button mat-button>En savoir plus</button></a>
-  </mat-card-actions>
-</mat-card>
+    <a class="card-link" href={{initiative.link}} target="_blank">En savoir plus</a>
+  </div>
+</div>
