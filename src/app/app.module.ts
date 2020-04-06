@@ -15,6 +15,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
+import { FooterComponent } from './share/footer/footer.component';
+import { FooterWrapperComponent } from './share/footer/footer-wrapper/footer-wrapper.component';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faSquare, faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+import { faSquare as farSquare, faCheckSquare as farCheckSquare } from '@fortawesome/free-regular-svg-icons';
+import { faStackOverflow, faGithub, faMedium, faFacebook, faTwitter, faLinkedin, faYoutube } from '@fortawesome/free-brands-svg-icons';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +30,9 @@ import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
     NavComponent,
     VignetteComponent,
     ListeInitiativesComponent,
-    JumbotronComponent
+    JumbotronComponent,
+    FooterComponent,
+    FooterWrapperComponent
   ],
   imports: [
     BrowserModule,
@@ -33,9 +42,16 @@ import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
     MatCardModule,
     MatDividerModule,
     MatGridListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private library: FaIconLibrary) {
+    library.addIcons(faSquare, faCheckSquare, farSquare
+        , farCheckSquare, faStackOverflow, faGithub, faMedium,
+        faFacebook, faTwitter, faLinkedin, faYoutube);
+  }
+}
