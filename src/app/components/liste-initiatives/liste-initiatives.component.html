@@ -1,21 +1,86 @@
 <div class="liste-initiative">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-md-6 col-xl-4" *ngFor="let initiative of listeInitiatives">
-        <app-vignette [initiative]="initiative"></app-vignette>
+  <div class="container" [ngSwitch]="callState">
+    <div *ngSwitchCase="'ok'">
+      <!-- search -->
+      <div class="row mb-4">
+        <div class="form-row align-items-center">
+
+          <div class="col-auto">
+            <label for="structure-name">Nom de la structure</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <!-- Search icon in svg -->
+                  <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z"
+                      clip-rule="evenodd" />
+                    <path fill-rule="evenodd"
+                      d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </span>
+              </div>
+              <input class="form-control" id='structure-name' type="text" aria-label="Rechercher"
+                placeholder="Rechercher..." (keyup)="onChange($event)">
+            </div>
+          </div>
+
+          <div class="col-auto">
+            <label for="initiative-type">Type d'initiative</label>
+            <select class="custom-select" id="initiative-type" (change)="onSelectType($event)">
+              <option selected value="">Toutes types</option>
+              <option value="besoin">Besoin</option>
+              <option value="soutien">Soutien</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+      <!-- card-columns -->
+      <!-- cards -->
+      <div class="row mb-4">
+        <div *ngIf="pageReader.isEmpty()" class="alert alert-secondary" role="alert">
+          Aucune initiatives à afficher
+        </div>
+        <div class="card-columns">
+          <app-vignette *ngFor="let initiative of pageReader.getCurrent()" [initiative]="initiative">
+          </app-vignette>
+        </div>
+      </div>
+
+      <!-- pagination -->
+      <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+
+          <!-- previous page -->
+          <li class="page-item" [ngClass]="{'disabled': pageReader.getIndex() <= 0}">
+            <a class="page-link" href="#" tabindex="-1" (click)="pageReader.prev()">Précédent</a>
+          </li>
+
+          <!-- pages -->
+          <li class="page-item" [ngClass]="{'active': pageReader.getIndex() === i}"
+            *ngFor="let page of pageReader.getPages(); let i = index">
+            <a class="page-link" href="#" (click)="this.pageReader.setIndex(i)">
+              {{i + 1}}
+              <span class="sr-only" *ngIf="pageReader.getIndex() === i">(current)</span>
+            </a>
+          </li>
+          <!-- next page -->
+          <li class="page-item" [ngClass]="{'disabled': pageReader.getIndex() >= pageReader.getLength() - 1}">
+            <a class="page-link" href="#" (click)="pageReader.next()">Suivant</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div *ngSwitchCase="'ko'" class="alert alert-danger" role="alert">
+      Une erreur c'est produite lors du chargement.
+    </div>
+    <div *ngSwitchDefault class="d-flex justify-content-center">
+      <div class="spinner-border text-dark m-5" style="width: 3rem; height: 3rem;" role="loader">
+        <span class="sr-only">Loading...</span>
       </div>
     </div>
   </div>
-  <nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center">
-      <li class="page-item" [ngClass]="{'disabled': pageActions.getIndex() <= 0}">
-        <a class="page-link" href="#" tabindex="-1" (click)="prev()">Précédent</a>
-      </li>
-      <li class="page-item" *ngFor="let pageRender of results; let i = index">
-        <a class="page-link" href="#" (click)="setPageIndex(i)">{{i + 1}}</a></li>
-      <li class="page-item" [ngClass]="{'disabled': pageActions.getIndex() >= results.length - 1}">
-        <a class="page-link" href="#" (click)="next()">Suivant</a>
-      </li>
-    </ul>
-  </nav>
 </div>

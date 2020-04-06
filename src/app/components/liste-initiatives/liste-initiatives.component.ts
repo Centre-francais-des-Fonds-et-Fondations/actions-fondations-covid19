@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getInitiatives, getInitiativesByPages, pageReader } from '../../../airtable';
+import { getInitiatives, getInitiativesByPages, PageReader } from '../../../airtable';
 
 @Component({
   selector: 'app-liste-initiatives',
@@ -7,34 +7,50 @@ import { getInitiatives, getInitiativesByPages, pageReader } from '../../../airt
   styleUrls: ['./liste-initiatives.component.scss']
 })
 export class ListeInitiativesComponent implements OnInit {
+  pageReader: any;
+  query = '';
+  queryType = '';
+  PAGE_SIZE = 6;
 
-  results;
-  pageActions;
-  listeInitiatives;
-
-  constructor() { }
-
-  ngOnInit(): void {
-    getInitiativesByPages(12)
-    .then((listResults: Array<Array<any>>) => {
-      console.log('listResults');
-      console.log(listResults);
-      this.results = listResults;
-      this.listeInitiatives = listResults[0];
-      this.pageActions = pageReader(listResults);
-    }).catch();
+  callState = 'await';
+  async ngOnInit() {
+    try {
+      const data = await getInitiativesByPages(this.PAGE_SIZE);
+      this.pageReader = PageReader(data);
+      this.callState = 'ok';
+      console.log(data);
+    } catch (err) {
+      this.callState = 'ko';
+    }
   }
 
-  next(){
-    this.listeInitiatives = this.pageActions.next();
+  onChange(event: any) {
+    this.query = event.target.value.toLowerCase();
+    this.search();
   }
-  prev(){
-    this.listeInitiatives = this.pageActions.prev();
-  }
-  setPageIndex(i: number) {
-    this.pageActions.setIndex(i);
-    this.listeInitiatives = this.pageActions.get();
+  onSelectType(event: any) {
+    this.queryType = event.target.value.toLowerCase();
+    this.search();
   }
 
-
+  search() {
+    this.pageReader.search(
+      (record) => {
+        // si rien, tout afficher
+        if (this.query.length === 0 && this.queryType.length === 0) {
+          return true;
+        }
+        // sinon ...
+        let valid = true;
+        if (this.query.length > 0) {
+          valid = record.structureName.toLowerCase().match(new RegExp(`${this.query}.*`));
+        }
+        if (this.queryType.length > 0) {
+          valid = valid && record.initiativeType.toLowerCase().match(new RegExp(`${this.queryType}.*`));
+        }
+        return valid;
+      }
+    );
+    this.pageReader.setIndex(0);
+  }
 }

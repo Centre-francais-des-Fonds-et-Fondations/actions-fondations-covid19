@@ -9,11 +9,11 @@ import { NavComponent } from './share/nav/nav.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { ListeInitiativesComponent } from './components/liste-initiatives/liste-initiatives.component';
 
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatToolbarModule } from '@angular/material/toolbar';
+// import { MatButtonModule } from '@angular/material/button';
+// import { MatCardModule } from '@angular/material/card';
+// import { MatDividerModule } from '@angular/material/divider';
+// import { MatGridListModule } from '@angular/material/grid-list';
+// import { MatToolbarModule } from '@angular/material/toolbar';
 import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
 import { FooterComponent } from './share/footer/footer.component';
 import { FooterWrapperComponent } from './share/footer/footer-wrapper/footer-wrapper.component';
@@ -38,11 +38,6 @@ import { faStackOverflow, faGithub, faMedium, faFacebook, faTwitter, faLinkedin,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDividerModule,
-    MatGridListModule,
-    MatToolbarModule,
     FontAwesomeModule
   ],
   providers: [],
