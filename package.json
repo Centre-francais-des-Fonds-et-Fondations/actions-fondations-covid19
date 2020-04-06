@@ -29,6 +29,7 @@
     "airtable": "^0.8.1",
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
+    "normalize-url": "^5.0.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

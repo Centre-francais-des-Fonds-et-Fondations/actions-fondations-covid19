@@ -22,6 +22,6 @@
     <p class="card-text" *ngIf="initiative.supportDescription">
       {{initiative.supportDescription}}
     </p>
-    <a class="card-link" href={{initiative.link}} target="_blank">En savoir plus</a>
+    <a class="card-link" [href]="getHttpLink(initiative.link)" target="_blank">En savoir plus</a>
   </div>
 </div>

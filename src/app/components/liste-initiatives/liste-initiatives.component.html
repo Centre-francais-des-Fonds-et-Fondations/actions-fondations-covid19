@@ -40,11 +40,11 @@
     <!-- card-columns -->
     <!-- cards -->
     <div class="row mb-4">
-      <div *ngIf="pageReader.isEmpty()" class="col alert alert-secondary" role="alert">
+      <div *ngIf="pageReader.isEmpty()" class="col col-12 alert alert-secondary" role="alert">
         Aucune initiative à afficher.
       </div>
       <div class="card-columns col">
-        <app-vignette class="" *ngFor="let initiative of pageReader.getCurrent()" [initiative]="initiative">
+        <app-vignette *ngFor="let initiative of pageReader.getCurrent()" [initiative]="initiative">
         </app-vignette>
       </div>
     </div>
