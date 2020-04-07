@@ -1,7 +1,7 @@
 <div class="container" [ngSwitch]="callState">
 
   <!-- Content -->
-  <div *ngSwitchCase="'ok'" id='list-initiative'>
+  <div *ngSwitchCase="'ok'" id='initiatives'>
     <!-- search -->
     <div class="form-row mb-4 align-items-center">
 
@@ -55,20 +55,20 @@
 
         <!-- previous page -->
         <li class="page-item" [ngClass]="{'disabled': pageReader.getIndex() <= 0}">
-          <a class="page-link" href="#list-initiative" tabindex="-1" (click)="pageReader.prev()">Précédent</a>
+          <a class="page-link" href="#initiatives" tabindex="-1" (click)="pageReader.prev()">Précédent</a>
         </li>
 
         <!-- pages -->
         <li class="page-item" [ngClass]="{'active': pageReader.getIndex() === i}"
           *ngFor="let page of pageReader.getPages(); let i = index">
-          <a class="page-link" href="#list-initiative" (click)="this.pageReader.setIndex(i)">
+          <a class="page-link" href="#initiatives" (click)="pageReader.setIndex(i)">
             {{i + 1}}
             <span class="sr-only" *ngIf="pageReader.getIndex() === i">(current)</span>
           </a>
         </li>
         <!-- next page -->
         <li class="page-item" [ngClass]="{'disabled': pageReader.getIndex() >= pageReader.getLength() - 1}">
-          <a class="page-link" href="#list-initiative" (click)="pageReader.next()">Suivant</a>
+          <a class="page-link" href="#initiatives" (click)="pageReader.next()">Suivant</a>
         </li>
       </ul>
     </nav>

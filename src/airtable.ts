@@ -136,7 +136,7 @@ const PageReader = <t>(array: Array<Array<t>>) => {
   // let accumulator = []; // contient tous les elements à plat de 0 à currentIndex
   const sort = () => {
     arrayBuffer = arrayByPages(
-      array
+      arrayBuffer
         // flatten
         .reduce((acc, cur, i) => [...acc, ...cur], [])
         // sort by date
@@ -167,7 +167,9 @@ const PageReader = <t>(array: Array<Array<t>>) => {
       //   .reduce((acc, cur, i) => [...acc, ...cur], []);
       return arrayBuffer[currentIndex];
     },
-    setIndex: (index: number) => currentIndex = index,
+    setIndex: (index: number) => {
+      currentIndex = index;
+    },
     getCurrent: () => arrayBuffer[currentIndex],
     getPages: () => arrayBuffer,
     getPageSize: () => arrayBuffer[currentIndex].length,
@@ -183,7 +185,7 @@ const PageReader = <t>(array: Array<Array<t>>) => {
           // flatten
           .reduce((acc, cur, i) => [...acc, ...cur], []),
         array[0].length);
-      this.sort();
+      sort();
     },
     sort
   };

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import normalizeUrl from 'normalize-url';
 
 @Component({
   selector: 'app-vignette',
@@ -15,7 +14,10 @@ export class VignetteComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getHttpLink(link: string) {
-    return normalizeUrl(link);
+  normalizeUrl(url: string) {
+    if (!url.startsWith('https://') && !url.startsWith('http://')) {
+      return `https://${url}`;
+    }
+    return url;
   }
 }
