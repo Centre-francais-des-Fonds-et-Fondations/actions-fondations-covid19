@@ -10,7 +10,7 @@ export class ListeInitiativesComponent implements OnInit {
   pageReader: any;
   query = '';
   queryType = '';
-  PAGE_SIZE = 6;
+  PAGE_SIZE = 12;
 
   callState = 'await';
   async ngOnInit() {
