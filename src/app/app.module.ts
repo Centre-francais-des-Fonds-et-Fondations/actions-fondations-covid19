@@ -18,7 +18,6 @@ import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
 import { CtaComponent } from './components/cta/cta.component';
 import { NavComponent } from './share/nav/nav.component';
 import { FooterComponent } from './share/footer/footer.component';
-import { FooterWrapperComponent } from './share/footer/footer-wrapper/footer-wrapper.component';
 
 
 @NgModule({
@@ -30,7 +29,6 @@ import { FooterWrapperComponent } from './share/footer/footer-wrapper/footer-wra
     ListeInitiativesComponent,
     JumbotronComponent,
     FooterComponent,
-    FooterWrapperComponent,
     CtaComponent
   ],
   imports: [

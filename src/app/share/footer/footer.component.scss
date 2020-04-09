@@ -1,0 +1,43 @@
+.footer-wrapper {
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", Arial, sans-serif;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.block-footer::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  width: 1px;
+  height: 100%;
+  background-color: #ccc;
+}
+
+/* Centered text */
+.centered {
+  top: 50%;
+  left: 50%;
+  transform: translate(0%, -30%);
+}
+
+.jumbotron-logo {
+  max-height: 70%;
+  width: fit-content;
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  fill: rgba(255, 255, 255, 0.2)
+}
+
+.jumbotron-logo-dark {
+  fill: rgba(0, 0, 0, 0.2)
+}
