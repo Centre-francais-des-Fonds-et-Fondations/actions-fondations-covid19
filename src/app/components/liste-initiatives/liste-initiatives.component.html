@@ -5,7 +5,7 @@
     <!-- search -->
     <div class="form-row align-items-center">
 
-      <div class="col-md-6 col-lg-4 mb-3">
+      <div class="col-md-6 col-lg mb-3">
         <label for="structure-name">Nom de la structure</label>
         <div class="input-group">
           <div class="input-group-prepend">
@@ -30,7 +30,7 @@
       <div class="col-md-6 col-lg mb-3">
         <label for="initiative-type">Type d'initiative</label>
         <select class="custom-select" id="initiative-type" (change)="onSelectType($event)">
-          <option selected value="">Tous types de d'initiatives</option>
+          <option selected value="">Tous types d'initiatives</option>
           <option *ngFor="let field of types" value={{field.toLowerCase()}}>{{field}}</option>
         </select>
       </div>
@@ -38,7 +38,7 @@
       <div class="col-md col-lg mb-3">
         <label for="intervention-area">Secteur d'intervention</label>
         <select class="custom-select" id="intervention-area" (change)="onSelectArea($event)">
-          <option selected value="">Tous secteurs d'intervention</option>
+          <option selected value="">Tous secteurs d'interventions</option>
           <option *ngFor="let field of areas" value={{field.toLowerCase()}}>{{field}}</option>
         </select>
       </div>
@@ -46,7 +46,7 @@
       <div class="col-md col-lg mb-3">
         <label for="intervention-zone">Zone d'intervention</label>
         <select class="custom-select" id="intervention-zone" (change)="onSelectZone($event)">
-          <option selected value="">Toutes zones d'intervention</option>
+          <option selected value="">Toutes zones d'interventions</option>
           <option *ngFor="let field of zones" value={{field.toLowerCase()}}>{{field}}</option>
         </select>
       </div>
