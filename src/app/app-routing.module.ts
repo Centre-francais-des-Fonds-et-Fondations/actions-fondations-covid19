@@ -6,7 +6,7 @@ import { CtaComponent } from './components/cta/cta.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
-  { path: 'cta', component: CtaComponent }
+  { path: 'legal-notice', component: CtaComponent }
 ];
 
 @NgModule({
