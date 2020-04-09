@@ -1,27 +1,41 @@
-<div class="card" *ngIf="initiative">
-  <img class="card-img-top" src={{initiative.attachments[0].url}} alt="{{ initiative.structureName }} picture"
-    *ngIf="initiative.attachments">
+<div class="card shadow-sm bg-white rounded" *ngIf="initiative">
+  <div class="cff-vignette-img card-img-top">
+    <img src={{initiative.attachments[0].url}} alt="{{ initiative.structureName }} picture"
+      *ngIf="initiative.attachments">
+  </div>
 
   <div class="card-body">
     <h5 class="card-title">{{ initiative.structureName }}</h5>
-    <div class="card-subtitle mb-2">
-      <h6 class="text-muted mb-1" *ngIf="initiative.initiativeType">
-        Type d'initiative : {{initiative.initiativeType}}
-      </h6>
-      <h6 class="text-muted mb-1" *ngIf="initiative.amount">
-        Montant: {{initiative.amount | currency:'EUR':'symbol':'2.0-2':'fr' }}
-      </h6>
-    </div>
+    <!-- <div class="card-subtitle mb-2">
+    </div> -->
 
-    <p class="card-text" *ngIf="initiative.actionDescription">
+    <!-- <p class="card-text" *ngIf="initiative.actionDescription">
       {{initiative.actionDescription}}
-    </p>
-    <p class="card-text" *ngIf="initiative.initiativeDescription">
+    </p> -->
+    <p class="card-text mb-3" *ngIf="initiative.initiativeDescription">
       {{initiative.initiativeDescription}}
     </p>
-    <p class="card-text" *ngIf="initiative.supportDescription">
+    <!-- <p class="card-text" *ngIf="initiative.supportDescription">
       {{initiative.supportDescription}}
-    </p>
+    </p> -->
+    <div class="mb-3 text-small" *ngIf="initiative.initiativeType">
+      <h6 class="text-muted text-uppercase mb-0">
+        Type d'initiative
+      </h6>
+      <p>{{initiative.initiativeType}}</p>
+    </div>
+
+    <div class="mb-3 text-small" *ngIf="initiative.interventionAreas">
+      <h6 class="text-muted text-uppercase mb-0">
+        Secteurs d’interventions
+      </h6>
+      <span class="badge badge-primary text-wrap mr-1"
+        *ngFor="let value of initiative.interventionAreas">{{value}}</span>
+    </div>
+    <!-- <h6 class="text-muted mb-1" *ngIf="initiative.amount">
+      Montant: {{initiative.amount | currency:'EUR':'symbol':'2.0-2':'fr' }}
+    </h6> -->
+
     <a *ngIf="initiative.link" class="card-link" [href]="normalizeUrl(initiative.link)" target="_blank">En savoir
       plus</a>
   </div>

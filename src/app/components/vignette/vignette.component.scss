@@ -1,20 +1,14 @@
-.vignette {
-  max-width: 400px;
-  margin: 10px 0;
+.cff-vignette-img {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 15px;
 
-  .logo-vignette {
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 200px;
-    margin: 10px;
-  }
+  height: 200px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
 
-  .contenu-vignette {
-    margin-top: 15px;
-  }
-
-  .titre-vignette {
-    margin-bottom: 20px;
-  }
+.cff-vignette-img>img {
+  max-width: 100%;
+  max-height: 100%;
 }
