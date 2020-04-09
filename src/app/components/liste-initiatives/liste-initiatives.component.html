@@ -1,103 +1,147 @@
-<div class="container" [ngSwitch]="callState">
+<div class="bg-light">
+  <div class="container py-5" [ngSwitch]="callState" id='initiatives' #element>
 
-  <!-- Content -->
-  <div *ngSwitchCase="'ok'" id='initiatives'>
-    <!-- search -->
-    <div class="form-row align-items-center">
+    <!-- Content -->
+    <div *ngSwitchCase="'ok'">
+      <!-- search -->
+      <div class="card card-body mb-3">
+        <div class="form-row align-items-center">
 
-      <div class="col-md-6 col-lg mb-3">
-        <label for="structure-name">Nom de la structure</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">
-              <!-- Search icon in svg -->
-              <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z"
-                  clip-rule="evenodd" />
-                <path fill-rule="evenodd"
-                  d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
-                  clip-rule="evenodd" />
-              </svg>
-            </span>
+          <div class="col-md-6 col-lg mb-3">
+            <label for="structure-name">Nom de la structure</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <!-- Search icon in svg -->
+                  <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z"
+                      clip-rule="evenodd" />
+                    <path fill-rule="evenodd"
+                      d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </span>
+              </div>
+              <input class="form-control" id='structure-name' type="text" aria-label="Rechercher une structure"
+                placeholder="Rechercher une structure..." (keyup)="onChange($event)">
+            </div>
           </div>
-          <input class="form-control" id='structure-name' type="text" aria-label="Rechercher une structure"
-            placeholder="Rechercher une structure..." (keyup)="onChange($event)">
+
+          <div class="col-md-6 col-lg mb-3">
+            <label for="initiative-type">Type d'initiative</label>
+            <select class="custom-select" id="initiative-type" (change)="onSelectType($event)">
+              <option selected value="">Tous types d'initiatives</option>
+              <option *ngFor="let field of types" value={{field.toLowerCase()}}>{{field}}</option>
+            </select>
+          </div>
+
+          <div class="col-md col-lg mb-3">
+            <label for="intervention-area">Secteur d'intervention</label>
+            <select class="custom-select" id="intervention-area" (change)="onSelectArea($event)">
+              <option selected value="">Tous secteurs d'interventions</option>
+              <option *ngFor="let field of areas" value={{field.toLowerCase()}}>{{field}}</option>
+            </select>
+          </div>
+
+          <div class="col-md col-lg mb-3">
+            <label for="intervention-zone">Zone d'intervention</label>
+            <select class="custom-select" id="intervention-zone" (change)="onSelectZone($event)">
+              <option selected value="">Toutes zones d'interventions</option>
+              <option *ngFor="let field of zones" value={{field.toLowerCase()}}>{{field}}</option>
+            </select>
+          </div>
+
+          <div class="col-md col-lg mb-3">
+            <label for="intervention-zone">Région</label>
+            <select class="custom-select" id="intervention-zone" (change)="onSelectRegion($event)">
+              <option selected value="">Toutes régions</option>
+              <option *ngFor="let field of regions" value={{field.toLowerCase()}}>{{field}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- card-columns -->
+      <!-- cards -->
+      <div class="row mb-4">
+        <div *ngIf="pageReader.isEmpty()" class="col col-12 alert alert-secondary" role="alert">
+          Aucune initiative à afficher.
+        </div>
+        <div class="card-columns col">
+          <app-vignette *ngFor="let initiative of pageReader.getCurrent()" [initiative]="initiative">
+          </app-vignette>
         </div>
       </div>
 
-      <div class="col-md-6 col-lg mb-3">
-        <label for="initiative-type">Type d'initiative</label>
-        <select class="custom-select" id="initiative-type" (change)="onSelectType($event)">
-          <option selected value="">Tous types d'initiatives</option>
-          <option *ngFor="let field of types" value={{field.toLowerCase()}}>{{field}}</option>
-        </select>
-      </div>
+      <!-- pagination -->
+      <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
 
-      <div class="col-md col-lg mb-3">
-        <label for="intervention-area">Secteur d'intervention</label>
-        <select class="custom-select" id="intervention-area" (change)="onSelectArea($event)">
-          <option selected value="">Tous secteurs d'interventions</option>
-          <option *ngFor="let field of areas" value={{field.toLowerCase()}}>{{field}}</option>
-        </select>
-      </div>
+          <!-- previous page -->
+          <li class="page-item" [ngClass]="{'disabled': pageReader.getIndex() <= 0}">
+            <button role="button" class="page-link" tabindex="-1"
+              (click)="pageReader.prev();gotoSearch(element)">Précédent</button>
+          </li>
 
-      <div class="col-md col-lg mb-3">
-        <label for="intervention-zone">Zone d'intervention</label>
-        <select class="custom-select" id="intervention-zone" (change)="onSelectZone($event)">
-          <option selected value="">Toutes zones d'interventions</option>
-          <option *ngFor="let field of zones" value={{field.toLowerCase()}}>{{field}}</option>
-        </select>
-      </div>
+          <!-- pages -->
+          <li class="page-item" [ngClass]="{'active': pageReader.getIndex() === i}"
+            *ngFor="let page of pageReader.getPages(); let i = index">
+            <button role="button" class="page-link" (click)="pageReader.setIndex(i);gotoSearch(element)">
+              {{i + 1}}
+              <span class="sr-only" *ngIf="pageReader.getIndex() === i">(current)</span>
+            </button>
+          </li>
+          <!-- next page -->
+          <li class="page-item" [ngClass]="{'disabled': pageReader.getIndex() >= pageReader.getLength() - 1}">
+            <button role="button" class="page-link" (click)="pageReader.next();gotoSearch(element)">Suivant</button>
+          </li>
+        </ul>
+      </nav>
+      <!-- href="#initiatives" -->
+      <a id="back-to-top" class="btn btn-light back-to-top" role="button" (click)="gotoSearch(element)">
+        <svg class="bi bi-arrow-up-short" fill="#0083be" width="100%" height="100%" viewBox="0 0 16 16"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M8 5.5a.5.5 0 01.5.5v5a.5.5 0 01-1 0V6a.5.5 0 01.5-.5z" clip-rule="evenodd" />
+          <path fill-rule="evenodd"
+            d="M7.646 4.646a.5.5 0 01.708 0l3 3a.5.5 0 01-.708.708L8 5.707 5.354 8.354a.5.5 0 11-.708-.708l3-3z"
+            clip-rule="evenodd" />
+        </svg>
+      </a>
 
     </div>
-    <!-- card-columns -->
-    <!-- cards -->
-    <div class="row mb-4">
-      <div *ngIf="pageReader.isEmpty()" class="col col-12 alert alert-secondary" role="alert">
-        Aucune initiative à afficher.
-      </div>
-      <div class="card-columns col">
-        <app-vignette *ngFor="let initiative of pageReader.getCurrent()" [initiative]="initiative">
-        </app-vignette>
-      </div>
+
+    <!-- Error screen -->
+    <div *ngSwitchCase="'ko'" class="alert alert-danger" role="alert">
+      Une erreur c'est produite lors du chargement.
     </div>
 
-    <!-- pagination -->
-    <nav aria-label="Page navigation">
-      <ul class="pagination justify-content-center">
-
-        <!-- previous page -->
-        <li class="page-item" [ngClass]="{'disabled': pageReader.getIndex() <= 0}">
-          <a class="page-link" href="#initiatives" tabindex="-1" (click)="pageReader.prev()">Précédent</a>
-        </li>
-
-        <!-- pages -->
-        <li class="page-item" [ngClass]="{'active': pageReader.getIndex() === i}"
-          *ngFor="let page of pageReader.getPages(); let i = index">
-          <a class="page-link" href="#initiatives" (click)="pageReader.setIndex(i)">
-            {{i + 1}}
-            <span class="sr-only" *ngIf="pageReader.getIndex() === i">(current)</span>
-          </a>
-        </li>
-        <!-- next page -->
-        <li class="page-item" [ngClass]="{'disabled': pageReader.getIndex() >= pageReader.getLength() - 1}">
-          <a class="page-link" href="#initiatives" (click)="pageReader.next()">Suivant</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-
-  <!-- Error screen -->
-  <div *ngSwitchCase="'ko'" class="alert alert-danger" role="alert">
-    Une erreur c'est produite lors du chargement.
-  </div>
-
-  <!-- Loading screen -->
-  <div *ngSwitchDefault class="d-flex justify-content-center">
-    <div class="spinner-border text-dark m-5" style="width: 3rem; height: 3rem;" role="loader">
-      <span class="sr-only">Loading...</span>
+    <!-- Loading screen -->
+    <div *ngSwitchDefault class="d-flex justify-content-center" style="align-items: center;height: 50vh">
+      <div class="spinner-border text-dark m-5" style="width: 8rem; height: 8rem;" role="loader">
+        <span class="sr-only">Loading...</span>
+      </div>
     </div>
   </div>
 </div>
+<!-- <script>
+  $(document).ready(function () {
+    $(window).scroll(function () {
+      debugger
+      if ($(this).scrollTop() > 50) {
+        $('#back-to-top').fadeIn();
+      } else {
+        $('#back-to-top').fadeOut();
+      }
+    });
+    // scroll body to 0px on click
+    $('#back-to-top').click(function () {
+      debugger
+      $('body,html').animate({
+        scrollTop: 0
+      }, 400);
+      return false;
+    });
+  });
+
+</script> -->

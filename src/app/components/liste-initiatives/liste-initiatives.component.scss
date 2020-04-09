@@ -1,0 +1,12 @@
+.back-to-top {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  border-radius: 50%;
+  padding: 0;
+  height: 48px;
+  width: 48px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+  border: 1px solid rgba(0, 0, 0, .1) !important;
+  z-index: 999;
+}
