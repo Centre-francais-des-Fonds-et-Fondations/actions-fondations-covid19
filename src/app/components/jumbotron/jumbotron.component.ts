@@ -12,4 +12,10 @@ export class JumbotronComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  gotoSearch(element: HTMLElement) {
+    window.scrollTo({
+      top: element.offsetTop - 54,
+      behavior: 'smooth'
+    });
+  }
 }

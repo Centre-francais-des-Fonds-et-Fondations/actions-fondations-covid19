@@ -1,25 +1,25 @@
-.jumbotron{
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    background-color: #7193b9;
+.jumbotron {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: #7193b9;
 }
 
 hr {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    border: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    margin-left: 10px;
-    margin-right: 10px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .display-4 {
-    font-size: 2.5rem;
+  font-size: 2.5rem;
 }
 
 .font-italic {
-    font-style: italic!important;
+  font-style: italic !important;
 }
 
 // .mb-3, .my-3 {
@@ -30,3 +30,41 @@ hr {
 // .mb-0, .my-0 {
 //     margin-bottom: 0!important;
 // }
+.jumbotron-logo {
+  max-height: 70%;
+  width: fit-content;
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  fill: rgba(255, 255, 255, 0.2);
+}
+
+.cff {
+  top: 10px;
+  left: 0
+}
+
+.min-vh-70 {
+  height: 70vh;
+  min-height: 480px
+}
+
+.btn {
+  font-weight: 500 !important;
+}
+
+.lead {
+  font-weight: 400;
+}
+
+.display-4 {
+  font-size: 3.5rem;
+  line-height: 4rem;
+  font-weight: 700;
+}
+
+@media (max-width: 1199.98px) {
+  .display-4 {
+    font-size: 2.9rem;
+  }
+}
