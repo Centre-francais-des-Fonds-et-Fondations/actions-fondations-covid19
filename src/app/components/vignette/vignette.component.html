@@ -32,6 +32,21 @@
       <span class="badge badge-primary text-wrap mr-1"
         *ngFor="let value of initiative.interventionAreas">{{value}}</span>
     </div>
+
+    <div class="mb-3 text-small" *ngIf="initiative.interventionZone">
+      <h6 class="text-muted text-uppercase mb-0">
+        Zones d’interventions
+      </h6>
+      <span class="badge badge-primary text-wrap mr-1"
+        *ngFor="let value of initiative.interventionZone">{{value}}</span>
+    </div>
+
+    <div class="mb-3 text-small" *ngIf="initiative.region">
+      <h6 class="text-muted text-uppercase mb-0">
+        Régions d’interventions
+      </h6>
+      <span class="badge badge-primary text-wrap mr-1" *ngFor="let value of initiative.region">{{value}}</span>
+    </div>
     <!-- <h6 class="text-muted mb-1" *ngIf="initiative.amount">
       Montant: {{initiative.amount | currency:'EUR':'symbol':'2.0-2':'fr' }}
     </h6> -->

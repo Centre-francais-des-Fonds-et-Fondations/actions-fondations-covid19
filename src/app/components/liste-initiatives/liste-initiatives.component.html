@@ -54,9 +54,9 @@
           </div>
 
           <div class="col-md col-lg mb-3">
-            <label for="intervention-zone">Région</label>
+            <label for="intervention-région">Région d’intervention</label>
             <select class="custom-select" id="intervention-zone" (change)="onSelectRegion($event)">
-              <option selected value="">Toutes régions</option>
+              <option selected value="">Toutes régions d'interventions</option>
               <option *ngFor="let field of regions" value={{field.toLowerCase()}}>{{field}}</option>
             </select>
           </div>
