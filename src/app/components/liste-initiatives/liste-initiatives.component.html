@@ -7,7 +7,7 @@
       <div class="card card-body mb-3">
         <div class="form-row align-items-center">
 
-          <div class="col-md-6 col-lg mb-3">
+          <div class="col-lg col-md-6 col-sm-12 mb-3">
             <label for="structure-name">Nom de la structure</label>
             <div class="input-group">
               <div class="input-group-prepend">
@@ -29,7 +29,7 @@
             </div>
           </div>
 
-          <div class="col-md-6 col-lg mb-3">
+          <div class="col-lg col-md-6 col-sm-6 mb-3">
             <label for="initiative-type">Type d'initiative</label>
             <select class="custom-select" id="initiative-type" (change)="onSelectType($event)">
               <option selected value="">Tous types d'initiatives</option>
@@ -37,7 +37,7 @@
             </select>
           </div>
 
-          <div class="col-md col-lg mb-3">
+          <div class="col-lg col-md col-sm-6 mb-3">
             <label for="intervention-area">Secteur d'intervention</label>
             <select class="custom-select" id="intervention-area" (change)="onSelectArea($event)">
               <option selected value="">Tous secteurs d'interventions</option>
@@ -45,7 +45,7 @@
             </select>
           </div>
 
-          <div class="col-md col-lg mb-3">
+          <div class="col-lg col-md col-sm-6 mb-3">
             <label for="intervention-zone">Zone d'intervention</label>
             <select class="custom-select" id="intervention-zone" (change)="onSelectZone($event)">
               <option selected value="">Toutes zones d'interventions</option>
@@ -53,7 +53,7 @@
             </select>
           </div>
 
-          <div class="col-md col-lg mb-3">
+          <div class="col-lg col-md col-sm-6 mb-3">
             <label for="intervention-région">Région d’intervention</label>
             <select class="custom-select" id="intervention-zone" (change)="onSelectRegion($event)">
               <option selected value="">Toutes régions d'interventions</option>
@@ -64,11 +64,11 @@
       </div>
       <!-- card-columns -->
       <!-- cards -->
-      <div class="row mb-4">
-        <div *ngIf="pageReader.isEmpty()" class="col col-12 alert alert-secondary" role="alert">
+      <div class="mb-4">
+        <div *ngIf="pageReader.isEmpty()" class="col alert alert-secondary" role="alert">
           Aucune initiative à afficher.
         </div>
-        <div class="card-columns col">
+        <div class="card-columns">
           <app-vignette *ngFor="let initiative of pageReader.getCurrent()" [initiative]="initiative">
           </app-vignette>
         </div>
