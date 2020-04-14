@@ -19,10 +19,21 @@
 
 .block {
   display: flex !important;
+  flex-flow: column;
+  // border-top: 1px solid rgba(0, 0, 0, .2);
   border-bottom: 1px solid rgba(0, 0, 0, .2);
-  border-left: 1px solid rgba(0, 0, 0, .2);
   // height: 179px;
   // justify-content: center;
   // align-items: center;
-  flex-flow: column;
+}
+
+.block:not(:last-child)::after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 1px;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.2);
+  top: 0;
+  right: 0;
 }

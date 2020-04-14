@@ -48,15 +48,15 @@ hr {
 
 .min-vh-70 {
   min-height: 480px;
-  max-height: 800px;
-  height: calc(100vh - 54px - 179px);
+  // max-height: 800px;
+  // height: calc(100vh - 54px - 179px);
 }
 
-@media (max-width: 576px) {
-  .min-vh-70 {
-    height: calc(100vh - 54px);
-  }
-}
+// @media (max-width: 576px) {
+//   .min-vh-70 {
+//     height: calc(100vh - 54px);
+//   }
+// }
 
 .btn {
   font-weight: 500 !important;
