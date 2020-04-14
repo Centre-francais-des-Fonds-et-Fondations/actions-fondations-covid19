@@ -31,23 +31,31 @@ hr {
 //     margin-bottom: 0!important;
 // }
 .jumbotron-logo {
-  max-height: 70%;
-  width: fit-content;
+  max-height: 330px;
+  height: 50%;
+  width: auto;
+  max-width: calc(100% - 20px);
   position: absolute;
   bottom: 10px;
-  right: 0;
+  right: 10px;
   fill: rgba(255, 255, 255, 0.2);
 }
 
 .cff {
   top: 10px;
-  left: 0
+  left: 10px
 }
 
 .min-vh-70 {
-  height: 70vh;
-  min-height: 500px;
-  max-height: 600px;
+  min-height: 480px;
+  max-height: 800px;
+  height: calc(100vh - 54px - 179px);
+}
+
+@media (max-width: 576px) {
+  .min-vh-70 {
+    height: calc(100vh - 54px);
+  }
 }
 
 .btn {

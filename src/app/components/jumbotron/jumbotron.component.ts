@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ContentChild } from '@angular/core';
 
 @Component({
   selector: 'app-jumbotron',
@@ -12,7 +12,8 @@ export class JumbotronComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  gotoSearch(element: HTMLElement) {
+  gotoSearch() {
+    const element = document.getElementById('initiatives');
     window.scrollTo({
       top: element.offsetTop - 54,
       behavior: 'smooth'

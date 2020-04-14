@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ContentChild, ViewChild } from '@angular/core';
 import { getInitiatives, getInitiativesByPages, PageReader } from '../../../airtable';
 import { ViewportScroller } from '@angular/common';
 
@@ -8,6 +8,7 @@ import { ViewportScroller } from '@angular/common';
   styleUrls: ['./liste-initiatives.component.scss']
 })
 export class ListeInitiativesComponent implements OnInit {
+
   PAGE_SIZE = 21;
   callState = 'await';
   pageReader: any;
@@ -122,7 +123,8 @@ export class ListeInitiativesComponent implements OnInit {
       }
     );
   }
-  gotoSearch(element: HTMLElement) {
+  gotoSearch() {
+    const element = document.getElementById('initiatives');
     window.scrollTo({
       top: element.offsetTop - 54,
       behavior: 'smooth'

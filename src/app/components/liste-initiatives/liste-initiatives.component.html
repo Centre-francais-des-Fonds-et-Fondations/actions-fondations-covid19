@@ -1,5 +1,5 @@
 <div class="bg-light">
-  <div class="container py-5" [ngSwitch]="callState" id='initiatives' #element>
+  <div class="container py-5" [ngSwitch]="callState" id='initiatives' #initiatives>
 
     <!-- Content -->
     <div *ngSwitchCase="'ok'">
@@ -81,25 +81,25 @@
           <!-- previous page -->
           <li class="page-item" [ngClass]="{'disabled': pageReader.getIndex() <= 0}">
             <button role="button" class="page-link" tabindex="-1"
-              (click)="pageReader.prev();gotoSearch(element)">Précédent</button>
+              (click)="pageReader.prev();gotoSearch()">Précédent</button>
           </li>
 
           <!-- pages -->
           <li class="page-item" [ngClass]="{'active': pageReader.getIndex() === i}"
             *ngFor="let page of pageReader.getPages(); let i = index">
-            <button role="button" class="page-link" (click)="pageReader.setIndex(i);gotoSearch(element)">
+            <button role="button" class="page-link" (click)="pageReader.setIndex(i);gotoSearch()">
               {{i + 1}}
               <span class="sr-only" *ngIf="pageReader.getIndex() === i">(current)</span>
             </button>
           </li>
           <!-- next page -->
           <li class="page-item" [ngClass]="{'disabled': pageReader.getIndex() >= pageReader.getLength() - 1}">
-            <button role="button" class="page-link" (click)="pageReader.next();gotoSearch(element)">Suivant</button>
+            <button role="button" class="page-link" (click)="pageReader.next();gotoSearch()">Suivant</button>
           </li>
         </ul>
       </nav>
       <!-- href="#initiatives" -->
-      <a id="back-to-top" class="btn btn-light back-to-top" role="button" (click)="gotoSearch(element)">
+      <a id="back-to-top" class="btn btn-light back-to-top" role="button" (click)="gotoSearch()">
         <svg class="bi bi-arrow-up-short" fill="#0083be" width="100%" height="100%" viewBox="0 0 16 16"
           xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M8 5.5a.5.5 0 01.5.5v5a.5.5 0 01-1 0V6a.5.5 0 01.5-.5z" clip-rule="evenodd" />
