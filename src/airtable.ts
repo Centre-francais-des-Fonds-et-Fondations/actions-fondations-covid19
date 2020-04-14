@@ -6,6 +6,7 @@ const base = new Airtable({
 }).base(environment.airtable.baseId);
 
 const initiativeTable = base(environment.airtable.tableName);
+const kpiTable = base(environment.airtable.tableNameKPI);
 
 // Fields detail : https://airtable.com/appyiU5U8JBAf23m2/api/docs#javascript/table:initiatives:fields
 const formatRecord = (record: Record<string, any>): object => ({
@@ -42,7 +43,7 @@ const formatRecord = (record: Record<string, any>): object => ({
   // initiativeStatus: record.get("Statut de l'initiative"),
   initiativeDescription: record.get("Description de l'initiative"),
 
-  region: record.get('Régions'),
+  region: typeof record.get('Régions') === 'string' ? [record.get('Régions')] : record.get('Régions'),
   amount: record.get('Montant'),
   link: record.get('Lien vers votre page d’appel à don'),
   attachments: record.get('Attachment'),
@@ -105,6 +106,43 @@ const getInitiativesByPages = (pageSize = 10): Promise<Array<Array<Record<string
         }
       );
   });
+/**
+ * Recupere les kpis
+ */
+const getKPIs = (): Promise<any> =>
+  new Promise((res, rej) => kpiTable
+    .select({
+      view: environment.airtable.viewNameKPI,
+      fields: [
+      ],
+    })
+    .firstPage(
+      (err: any, records: Array<Record<string, any>>) => {
+        if (err) {
+          return rej(err);
+        }
+        res(records.reduce((acc: any, record: Record<string, any>) => {
+          switch (record.get('Name')) {
+            case 'Soutien':
+              acc.soutien = {
+                size: record.get('Nombre de soutien'),
+                amount: record.get('Montant soutien'),
+              };
+              break;
+            case 'Besoin':
+              acc.besoin = {
+                size: record.get('Nombre de soutien copy'),
+                amount: record.get('Montant besoin'),
+              };
+              break;
+            default:
+              console.error('error while fetching kpis');
+          }
+          return acc;
+        }, {}));
+      }
+    )
+  );
 
 /**
  * Permet d'acceder aux information pages par pages.
@@ -191,6 +229,7 @@ const PageReader = <t>(array: Array<Array<t>>) => {
   };
 };
 export {
+  getKPIs,
   getInitiatives,
   getInitiativesByPages,
   PageReader

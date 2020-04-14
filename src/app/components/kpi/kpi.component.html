@@ -1,0 +1,32 @@
+<!-- <div class="bg-primary">
+  <div class="container py-5"> -->
+<div class="row d-flex" style="margin: 0">
+  <div class="col-md-3 col-sm-12 p-3 order-md-1 order-3 text-center block" style="align-items: center">
+    <div class='display-4 text-bold text-primary'>{{soutien ? soutien.size : '-'}}</div>
+    <p class="lead">Fondations et fonds de dotation apportant un soutien</p>
+  </div>
+  <div class="col-md-3 col-sm-12 p-3 order-md-2 order-1 text-center block" style="align-items: center">
+    <div class='display-4 text-bold text-primary'>
+      {{soutien  ? (soutien.amount  | shortNumber) +'€': '-' }}
+    </div>
+    <p class="lead">Montant cumulé des soutiens apportés</p>
+  </div>
+  <div class="col-md-3 col-sm-12 p-3 order-md-3 order-2 text-center block" style="align-items: center">
+    <div class='display-4 text-bold text-primary'>
+      {{ besoin ? ( besoin.amount | shortNumber) +'€': '-' }}
+    </div>
+    <p class="lead">Montant cumulé des besoins apportés</p>
+  </div>
+  <div class="col-md-3 col-sm-12 p-3 order-md-4 order-4 text-center block" style="align-items: center">
+    <div class='display-4 text-bold text-primary'>{{besoin ? besoin.size : '-'}}</div>
+    <p class="lead">Fondations et fonds de dotation ayant de besoin</p>
+  </div>
+</div>
+<!-- {{soutien && besoin ? (soutien.amount + besoin.amount | currency:'EUR':'symbol':'1.0-2':'fr' ): '-' }} -->
+<!-- </div>
+</div> -->
+<!-- <div class="bg-light">
+  <div class="container py-1">
+    <hr>
+  </div>
+</div> -->

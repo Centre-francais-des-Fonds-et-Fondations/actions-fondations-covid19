@@ -18,7 +18,9 @@ import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
 import { CtaComponent } from './components/cta/cta.component';
 import { NavComponent } from './share/nav/nav.component';
 import { FooterComponent } from './share/footer/footer.component';
+import { KpiComponent } from './components/kpi/kpi.component';
 
+import { ShortNumberPipe } from './pipes/short-number';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { FooterComponent } from './share/footer/footer.component';
     ListeInitiativesComponent,
     JumbotronComponent,
     FooterComponent,
-    CtaComponent
+    CtaComponent,
+    ShortNumberPipe,
+    KpiComponent
   ],
   imports: [
     BrowserModule,
