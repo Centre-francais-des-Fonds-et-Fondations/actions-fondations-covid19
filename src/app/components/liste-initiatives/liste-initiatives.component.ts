@@ -60,10 +60,13 @@ export class ListeInitiativesComponent implements OnInit {
   async ngOnInit() {
     try {
       const data = await getInitiativesByPages(this.PAGE_SIZE);
+      console.log(data);
+
       this.pageReader = PageReader(data);
       this.callState = 'ok';
     } catch (err) {
       this.callState = 'ko';
+      console.error(err);
     }
   }
 

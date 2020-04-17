@@ -14,6 +14,7 @@ export class VignetteComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // normalisation des urls car on ne connait a aucune securité sur le fait que les lien entrés soient bien formatés
   normalizeUrl(url: string) {
     if (!url.startsWith('https://') && !url.startsWith('http://')) {
       return `https://${url}`;

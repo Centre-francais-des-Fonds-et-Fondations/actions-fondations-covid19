@@ -12,6 +12,7 @@ export class JumbotronComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // todo: generaliser cette fonction
   gotoSearch() {
     const element = document.getElementById('initiatives');
     window.scrollTo({
