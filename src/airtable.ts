@@ -1,6 +1,7 @@
 import Airtable from 'airtable';
 import { environment } from './environments/environment';
 
+// initiatlisation du lien avec airtable et des differentes tables appelés
 const base = new Airtable({
   apiKey: environment.airtable.apiKey,
 }).base(environment.airtable.baseId);
@@ -11,44 +12,51 @@ const kpiTable = base(environment.airtable.tableNameKPI);
 // Fields detail : https://airtable.com/appyiU5U8JBAf23m2/api/docs#javascript/table:initiatives:fields
 const formatRecord = (record: Record<string, any>): object => ({
   id: record.get('Id'),
-  // idNumber: record.get('Id number'),
-
   date: record.get('Date de création'),
+  structureName: record.get('Nom de la structure'),
+  interventionAreas: record.get('Secteurs d’interventions'),
+  interventionZone: record.get('Zone d’intervention'),
+  initiativeDescription: record.get('Description de l\'initiative'),
+  amount: record.get('Montant'),
+  link: record.get('Lien vers votre page d’appel à don'),
+  attachments: record.get('Attachment'),
 
+  initiativeType: (typeId => {
+    if (typeId[0] === 'rec915vWUomnXX2yQ') {// id des soutiens en base airtable
+      return 'Soutien';
+    }
+    if (typeId[0] === 'recuMtB1CMBTEOGPm') {// id des besoins
+      return 'Besoin';
+    }
+    return null;
+  })(record.get('Type d\'initiatives')),
+
+  region: (region => {
+    if (typeof region === 'string') {
+      return [region];
+    }
+    return region;
+  })(record.get('Régions')),
+
+  // idNumber: record.get('Id number'),
   // contactRole: record.get('Fonction du répondant'),
   // contactLastName: record.get('Nom du contact'),
   // contactFirstName: record.get('Prénom du contact'),
   // contactMail: record.get('Mail du contact'),
   // contactPhone: record.get('Téléphone du contact'),
-
   // knownMailInContactBase: record.get('Mail connu dans base contacts'),
-
   // requestState: record.get('Etat de la demande'),
-  structureName: record.get('Nom de la structure'),
-  approuvedStructures: record.get('Structure approuvée'),
-
-  interventionAreas: record.get('Secteurs d’interventions'),
-  interventionOtherArea: record.get('Champ autre secteur'),
-  interventionZone: record.get('Zone d’intervention'),
-
-  actionCoordinatedWithPP: record.get(
-    'Action coordonnée avec les pouvoirs publics (oui/non)'
-  ),
-  actionDescription: record.get('Description de l’action en 400 signes'),
-
-  supportAndEngagement: record.get('Soutiens et engagements'),
-  supportDescription: record.get('Description soutien en nature'),
-
-  initiativeType: record.get("Type d'initiative"),
+  // approuvedStructures: record.get('Structure approuvée'),
+  // interventionOtherArea: record.get('Champ autre secteur'),
+  // actionCoordinatedWithPP: record.get(
+  //   'Action coordonnée avec les pouvoirs publics (oui/non)'
+  // ),
+  // actionDescription: record.get('Description de l’action en 400 signes'),
+  // supportAndEngagement: record.get('Soutiens et engagements'),
+  // supportDescription: record.get('Description soutien en nature'),
   // initiativeStatus: record.get("Statut de l'initiative"),
-  initiativeDescription: record.get("Description de l'initiative"),
-
-  region: typeof record.get('Régions') === 'string' ? [record.get('Régions')] : record.get('Régions'),
-  amount: record.get('Montant'),
-  link: record.get('Lien vers votre page d’appel à don'),
-  attachments: record.get('Attachment'),
-  annualBudget: record.get('Budget annuel 2018 (total recettes)'),
-  legalForm: record.get('forme juridique'),
+  // annualBudget: record.get('Budget annuel 2018 (total recettes)'),
+  // legalForm: record.get('forme juridique'),
 });
 
 // la réponse de la promesse est un objet contenant les élément de formatRecord
@@ -60,6 +68,7 @@ const getInitiatives = async (): Promise<Array<Record<string, any>>> => {
     .firstPage() // on fetch les records
     .then((records: Array<Record<string, any>>) => records.map(formatRecord)); // on les normalise
 };
+
 /**
  * Renvoi ranger par pages TOUS les records initiatives
  * @param pageSize le nombre de records dans une page
@@ -77,9 +86,8 @@ const getInitiativesByPages = (pageSize = 10): Promise<Array<Array<Record<string
           'Structure approuvée',
           'Secteurs d’interventions',
           'Champ autre secteur',
-          `Type d'initiative`,
-          // 'Description de l’action en 400 signes',
-          "Description de l'initiative",
+          'Type d\'initiatives',
+          'Description de l\'initiative',
           'Soutiens et engagements',
           'Description soutien en nature',
           'Zone d’intervention',
@@ -94,15 +102,16 @@ const getInitiativesByPages = (pageSize = 10): Promise<Array<Array<Record<string
       })
       .eachPage(
         (records: Array<Record<string, any>>, fetchNextPage: () => void) => {
+          // on charge chaque page
           acc.push(records.map(formatRecord));
           fetchNextPage();
         },
         (err: any) => {
           if (err === null) {
-            res(acc);
-            return;
+            res(acc); // on retourne toutes les pages
+          } else {
+            rej(err);
           }
-          rej(err);
         }
       );
   });
