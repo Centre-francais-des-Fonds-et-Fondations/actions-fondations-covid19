@@ -1,8 +1,12 @@
 <div class="card shadow-sm bg-white rounded" *ngIf="initiative">
-  <div class="cff-vignette-img card-img-top">
-    <img src={{initiative.attachments[0].url}} alt="{{ initiative.structureName }} picture"
-      *ngIf="initiative.attachments">
-  </div>
+  <a *ngIf="initiative.link && initiative.attachments; else noLinkBlock" class="cff-vignette-img card-img-top" [href]="normalizeUrl(initiative.link)" target="_blank">
+    <img src={{initiative.attachments[0].url}} alt="{{ initiative.structureName }} picture">
+  </a>
+  <ng-template #noLinkBlock>
+    <div *ngIf="initiative.attachments" class="cff-vignette-img card-img-top">
+      <img src={{initiative.attachments[0].url}} alt="{{ initiative.structureName }} picture">
+    </div>
+  </ng-template>
 
   <div class="card-body">
     <h5 class="card-title">{{ initiative.structureName }}</h5>
